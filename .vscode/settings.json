@@ -20,8 +20,8 @@
       "**/core.python*": true,
       "**/CVS": true
    },
-   "files.autoSave": "off",
-   "workbench.colorTheme": "Visual Studio Dark",
+   "files.autoSave": "onWindowChange",
+   "workbench.colorTheme": "Monokai Vibrant",
    "terminal.integrated.gpuAcceleration": "canvas",
-   "editor.defaultFormatter": "HookyQR.beautify"
+   "editor.defaultFormatter": "ms-python.python"
 }
