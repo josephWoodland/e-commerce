@@ -12,7 +12,7 @@ def all_products(request):
         products.html
     """
 
-    products = Product.object.all()
+    products = Product.objects.all()
 
     context = {
         'products': products,

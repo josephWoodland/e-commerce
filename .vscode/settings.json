@@ -27,5 +27,6 @@
    "editor.fontSize": 16,
    "[json]": {
       "editor.defaultFormatter": "vscode.json-language-features"
-   }
+   },
+   "python.pythonPath": "/home/gitpod/.pyenv/versions/3.8.12/bin/python"
 }
