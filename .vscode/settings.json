@@ -24,5 +24,8 @@
    "workbench.colorTheme": "Moonokai",
    "terminal.integrated.gpuAcceleration": "canvas",
    "editor.defaultFormatter": "ms-python.python",
-   "editor.fontSize": 16
+   "editor.fontSize": 16,
+   "[json]": {
+      "editor.defaultFormatter": "vscode.json-language-features"
+   }
 }
