@@ -20,8 +20,9 @@
       "**/core.python*": true,
       "**/CVS": true
    },
-   "files.autoSave": "off",
-   "workbench.colorTheme": "Monokai Classic",
+   "files.autoSave": "onFocusChange",
+   "workbench.colorTheme": "Moonokai",
    "terminal.integrated.gpuAcceleration": "canvas",
-   "editor.defaultFormatter": "HookyQR.beautify"
+   "editor.defaultFormatter": "ms-python.python",
+   "editor.fontSize": 16
 }
