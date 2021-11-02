@@ -31,5 +31,8 @@
    "python.pythonPath": "/home/gitpod/.pyenv/versions/3.8.12/bin/python",
    "emmet.showSuggestionsAsSnippets": true,
    "emmet.triggerExpansionOnTab": true,
-   "editor.formatOnSave": true
+   "editor.formatOnSave": true,
+   "emmet.includeLanguages": {
+      "\"vue-html\"": "\"html\""
+   }
 }
