@@ -2,7 +2,7 @@
    "python.linting.pylintEnabled": true,
    "python.linting.enabled": true,
    "python.linting.pycodestyleEnabled": false,
-   "python.linting.flake8Enabled": false,
+   "python.linting.flake8Enabled": true,
    "python.terminal.activateEnvironment": false,
    "python.formatting.autopep8Path": "/home/gitpod/.pyenv/shims/autopep8",
    "python.linting.flake8Path": "/home/gitpod/.pyenv/shims/flake8",
@@ -21,7 +21,7 @@
       "**/CVS": true
    },
    "files.autoSave": "onFocusChange",
-   "workbench.colorTheme": "Monokai Classic",
+   "workbench.colorTheme": "Moonokai",
    "terminal.integrated.gpuAcceleration": "canvas",
    "editor.defaultFormatter": "ms-python.python",
    "editor.fontSize": 16,
@@ -34,6 +34,5 @@
    "editor.formatOnSave": true,
    "emmet.includeLanguages": {
       "\"vue-html\"": "\"html\""
-   },
-   "python.formatting.provider": "yapf"
+   }
 }
