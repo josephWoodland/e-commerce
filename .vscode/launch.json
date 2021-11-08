@@ -4,11 +4,15 @@
   "version": "0.2.0",
   "configurations": [
       {
-            "name": "Python: Current File (Integrated Terminal)",
+            "name": "Python: Django",
             "type": "python",
             "request": "launch",
-            "program": "${file}",
-            "console": "internalConsole"
+            "program": "manage.py",
+            "console": "internalConsole",
+            "args": [
+              "runserver"
+            ],
+            "django": true,
         }
   ]
 }
