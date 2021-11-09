@@ -6,8 +6,8 @@
     https://stripe.com/docs/stripe-js
 */
 
-var stripePublicKey = $('#id_stripe_public_key').text().slice(1, -1);
-var clientSecret = $('#id_client_secret').text().slice(1, -1);
+const stripePublicKey = $('#id_stripe_public_key').text().slice(1, -1);
+const clientSecret = $('#id_client_secret').text().slice(1, -1);
 const stripe = Stripe(stripePublicKey);
 const elements = stripe.elements();
 const style = {
@@ -58,27 +58,42 @@ form.addEventListener('submit', function(ev) {
     $('#submit-button').attr('disabled', true);
     $('#payment-form').fadeToggle(100);
     $('#loading-overlay').fadeToggle(100);
-    stripe.confirmCardPayment(clientSecret, {
-        payment_method: {
-            card: card,
-        }
-    }).then(function(result) {
-        if (result.error) {
-            const errorDiv = document.getElementById('card-errors');
-            const html = `
-                <span class="icon" role="alert">
-                <i class="fas fa-times"></i>
-                </span>
-                <span>${result.error.message}</span>`;
-            $(errorDiv).html(html);
-            $('#payment-form').fadeToggle(100);
-            $('#loading-overlay').fadeToggle(100);
-            card.update({ 'disabled': false});
-            $('#submit-button').attr('disabled', false);
-        } else {
-            if (result.paymentIntent.status === 'succeeded') {
-                form.submit();
+
+    const saveInfo = Boolean($('#id-save-info').attr('checked'));
+    const csrfToken = $('input[name="csrfmiddlewaretoken"').val();
+    const postDate = {
+        'csrfmiddlewaretoken': csrfToken,
+        'client_secret': clientSecret,
+        'save_info': saveInfo
+    }
+    const url = '/cache_checkout_data/'
+
+    $.post(url, postDate).done(function(){
+        stripe.confirmCardPayment(clientSecret, {
+            payment_method: {
+                card: card,
             }
-        }
-    });
+        }).then(function(result) {
+            if (result.error) {
+                const errorDiv = document.getElementById('card-errors');
+                const html = `
+                    <span class="icon" role="alert">
+                    <i class="fas fa-times"></i>
+                    </span>
+                    <span>${result.error.message}</span>`;
+                $(errorDiv).html(html);
+                $('#payment-form').fadeToggle(100);
+                $('#loading-overlay').fadeToggle(100);
+                card.update({ 'disabled': false});
+                $('#submit-button').attr('disabled', false);
+            } else {
+                if (result.paymentIntent.status === 'succeeded') {
+                    form.submit();
+                }
+            }
+        });
+    }).fail(function(){
+        // just reload the page the error will be in the Django messages
+        location.reload();
+    })
 });
