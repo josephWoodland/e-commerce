@@ -6,22 +6,15 @@ from .models import OrderLineItem
 
 @receiver(post_save, sender=OrderLineItem)
 def update_on_save(sender, instance, created, **kwargs):
-    """Update the order total on save
-
-    Args:
-        sender (str): Line Item
-        instance (str): What is going to be updated
-        created (boolen): instance from the server if item needs updating
+    """
+    Update order total on lineitem update/create
     """
     instance.order.update_total()
 
 
 @receiver(post_delete, sender=OrderLineItem)
 def update_on_delete(sender, instance, **kwargs):
-    """Update the order total on save
-
-    Args:
-        sender (str): Line Item
-        instance (str): What is going to be updated
+    """
+    Update order total on lineitem delete
     """
     instance.order.update_total()
