@@ -21,7 +21,7 @@
       "**/CVS": true
    },
    "files.autoSave": "onFocusChange",
-   "workbench.colorTheme": "Moonokai",
+   "workbench.colorTheme": "Mayukai Mono",
    "terminal.integrated.gpuAcceleration": "canvas",
    "editor.defaultFormatter": "ms-python.python",
    "editor.fontSize": 16,
