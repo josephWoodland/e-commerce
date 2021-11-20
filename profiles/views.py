@@ -1,9 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
 
+from checkout.models import Order
 from .models import UserProfile
 from .forms import UserProfileForm
-# Create your views here.
 
 
 def profile(request):

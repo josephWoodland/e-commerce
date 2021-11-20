@@ -1,19 +1,18 @@
+import time
+import json
+
 from django.http import HttpResponse
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.conf import settings
 
-from .models import Order, OrderLineItem
-from products.models import Product
 from profiles.models import UserProfile
-
-import json
-import time
+from products.models import Product
+from .models import Order, OrderLineItem
 
 
 class StripeWH_Handler:
     """Handle Stripe webhooks"""
-
     def __init__(self, request):
         self.request = request
 
@@ -24,23 +23,19 @@ class StripeWH_Handler:
             'checkout/confirmation_emails/confirmation_email_subject.txt',
             {'order': order})
         body = render_to_string(
-            'checkout/confirmation_emails/confirmation_email_body.txt',
-            {'order': order, 'contact_email': settings.DEFAULT_FROM_EMAIL})
+            'checkout/confirmation_emails/confirmation_email_body.txt', {
+                'order': order,
+                'contact_email': settings.DEFAULT_FROM_EMAIL
+            })
 
-        send_mail(
-            subject,
-            body,
-            settings.DEFAULT_FROM_EMAIL,
-            [cust_email]
-        )
+        send_mail(subject, body, settings.DEFAULT_FROM_EMAIL, [cust_email])
 
     def handle_event(self, event):
         """
         Handle a generic/unknown/unexpected webhook event
         """
         return HttpResponse(
-            content=f'Unhandled webhook received: {event["type"]}',
-            status=200)
+            content=f'Unhandled webhook received: {event["type"]}', status=200)
 
     def handle_payment_intent_succeeded(self, event):
         """
@@ -131,7 +126,8 @@ class StripeWH_Handler:
                         )
                         order_line_item.save()
                     else:
-                        for size, quantity in item_data['items_by_size'].items():
+                        for size, quantity in item_data['items_by_size'].items(
+                        ):
                             order_line_item = OrderLineItem(
                                 order=order,
                                 product=product,
@@ -155,6 +151,5 @@ class StripeWH_Handler:
         """
         Handle the payment_intent.payment_failed webhook from Stripe
         """
-        return HttpResponse(
-            content=f'Webhook received: {event["type"]}',
-            status=200)
+        return HttpResponse(content=f'Webhook received: {event["type"]}',
+                            status=200)
